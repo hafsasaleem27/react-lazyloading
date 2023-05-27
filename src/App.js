@@ -24,7 +24,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: (
-              <Suspense>
+              <Suspense fallback={<p>Loading...</p>}>
                 <BlogPage />
               </Suspense>
             ),
@@ -34,12 +34,12 @@ const router = createBrowserRouter([
           {
             path: ":id",
             element: (
-              <Suspense>
+              <Suspense fallback={<p>Loading...</p>}>
                 <PostPage />
               </Suspense>
             ),
-            loader: () =>
-              import("./pages/Post").then((module) => module.loader()),
+            loader: (meta) =>
+              import("./pages/Post").then((module) => module.loader(meta)),
           },
         ],
       },
